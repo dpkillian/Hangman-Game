@@ -161,16 +161,22 @@
       // 2 - Pick random word from wordList, make = currentWord
       //       var currentWord = wordList[Math.floor(Math.random()*wordList.length)];
 
-      // 3 - Convert currentWord into an addressable array (for letter positions)
+      // 3 - Convert currentWord into an addressable array (for letter positions and comparisons)
       //       Array.from(currentWord)
 
       // 4 - Wait for key press
 
-      // 5 - Check if currentKey matches letter in currentWord (via a loop = currentWord.length)
-      //       If match:    print letter to displayWord
-      //       If no match: add to lettersUsed, update screen, add hangman limb, subtract from # of guesses
+      // 5 - Check to see if there are any more remainingGuesses
+      //       If remainingGuess > 0; continue
+      //       else: Notify that there are no remaining guesses and the game is over
 
-      //  - Wait for key press
+      // 6 - Capture key press and assign to currentKey; add currentKey to lettersUsed array
+
+      // 7 - Check if currentKey matches letter in currentWord (via a loop = currentWord.length)
+      //       If match:    print letter to displayWord in the proper position, add to lettersUsed
+      //       If no match: update Hangman drawing, (f: add limb), subtract from # of guesses, add to lettersUsed
+
+      //  - Wait for next key press; go to 5
 
 
 
@@ -182,6 +188,10 @@
 
       // FUNCTIONS
       // ==============================================================================
+
+      // addLimb (){}
+
+      // addToLettersUsed (){}
 
 
     </script>
