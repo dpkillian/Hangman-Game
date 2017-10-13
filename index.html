@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<!-- Latest compiled and minified CSS -->
+<!-- Bootstrap CSS Reference -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 <html lang="en-us">
@@ -21,7 +21,7 @@
     <!-- FIRST ROW: "Hangman Game" heading and instructions, with game reset button --> 
       <div class="jumbotron">
         <h1>Hangman Game</h1>
-        <p>Classic word-guess game, played by selecting letters one at a time.  If you complete the word before running out of chances, you win!  Play as often as you'd like and see how many times you can win.  Good luck!!</p>
+        <p>Hangman is a classic word-guess game.  It begins when you select a letter (by pressing a key).  The goal is to guess what the word is, one letter at a time.  If you figure out the word before running out of chances, you win!  Play as often as you'd like and see how many times you can win.  Good luck and Happy Hunting ;)</p>
         <p><a class="btn btn-primary btn-lg" href="#" role="button">Start New Game</a></p>
       </div>
 
@@ -32,27 +32,65 @@
 
       <div class="row">
 
-          <!-- 1 of 2 Columns -->
+          <!-- 1 of 2 Columns: Left Column = Hangman image and Games Won -->
           <div class="col-md-6">
-              <h2>TEST</h2>
+
+            <!-- Hangman Image Place Holder -->
+            <a href="https://placeholder.com"><img class="img-responsive center-block" src="http://via.placeholder.com/450x350"></a>
+            <br>
+            <br>
+
+            <!-- "Wins" Box -->
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">Wins</h3>
+              </div>
+              <div class="panel-body">
+                INSERT "gamesWon"
+              </div>
+            </div>
+
           </div>
 
-          <!-- 2 of 2 Columns -->
+
+          <!-- 2 of 2 Columns: Right Column = Current Game Status (Word, # Guesses, Letters Used) -->
           <div class="col-md-6">
-              <h2>Press  <span id="user-press"><strong>...Nothing.</strong></span></h2>
+            <h4>You Pressed the Key:  <span id="user-press"><strong>...Nothing.</strong></span></h4>
+            <br>
+
+            <!-- "Current Word" Box -->
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">Current Word</h3>
+              </div>
+              <div class="panel-body">
+                  INSERT "currentWord"
+              </div>
+            </div>
+
+            <!-- "Number of Guesses" Box -->
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">Number of Guesses Remaining</h3>
+              </div>
+              <div class="panel-body">
+                  INSERT "remainingGuesses"
+              </div>
+            </div>
+
+
+            <!-- "Letters Used" Box -->
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">Letters Used</h3>
+              </div>
+              <div class="panel-body">
+                  INSERT "lettersUsed"
+              </div>
+            </div>
+
+
           </div>
-
-      </div>
-
-
-
-
-
-
-
-
-
-
 
     </div>
 
@@ -65,54 +103,79 @@
       // VARIABLES, ARRAYS, OBJECTS/METHODS
       // ==============================================================================
 
+      // wordList is the total list of words available for the game
+      var wordsList = ["ghost", "ghoul", "goblin", "witch", "dracula", "broomstick", "black cat", "fangs", "cemetery", "pumpkin", "candy", "lantern", "skeleton", "bat", "spider", "mummy", "tombstone", "howl", "spooky", "creepy", "scream", "cobweb", "fullmoon", "trick", "skull", "candy corn", "potion", "poison", "wicked", "blood", "zombie", "costume"];
 
-      var gamesPlayed
-      var gamesWon
-      var words = ["A", "B"];
+      // alphabet is the list of valid guesses
+      var alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 
-      var car = {
-        make: "Honda",
-        model: "Fit",
-        color: "Blue Raspberry",
-        mileage: 3000,
-        isWorking: true,
+      // gamesPlayed is the total games played (until a reset)
+      var gamesPlayed = 0;
 
-        driveToWork: function() {
+      // gamesWon is the total games won (until a reset)
+      var gamesWon = 0;
 
-          alert("Old Mileage: " + this.mileage);
-          this.mileage = this.mileage + 8;
-          alert("New mileage: " + this.mileage);
-        },
+      // currentWord is randomly picked from wordsList at reset or game-end
+      var currentWord = 0;
 
-        driveAroundWorld: function() {
+      // displayWord is an array.length = to currentWord with all zeros (until a correct guess)
+      var displayWord = 0;
 
-          alert("Old Mileage: " + this.mileage);
-          this.mileage = this.mileage + 24000;
-          alert("New Mileage: " + this.mileage);
-          alert("Car needs a tuneup!");
-          this.isWorking = false;
-        },
+      // totalGuesses is the total number of guesses until a reset or game-end
+      var totalGuesses = 0;
 
-        getTuneUp: function() {
+      // remainingGuesses is the number of (totalGuesses - incorrect attempts) until a reset or game-end
+      var remainingGuesses = 0;
 
-          alert("Car is ready to go!");
-          this.isWorking = true;
-        },
+      // lettersUsed is the array of letters picked until a reset or game-end
+      var lettersUsed = 0;
 
-        honk: function() {
-
-          alert("Honk! Honk!");
-        }
-      };
+      // gamesPlayed is the total games played (until a reset)
+      var currentKey = 0;
 
 
 
 
-
-
-      // MAIN PROCESS
+      // MAIN PROCESS: Wait for key press
       // ==============================================================================
 
+      // Grab reference to the <span> below...
+      var userText = document.getElementById("user-press");
+
+      // Execute main process "onkeyup" event
+      document.onkeyup = function(event) {
+        userText.textContent = event.key;
+
+      // Write textContent to console
+      console.log(userText.textContent);
+
+      // **** INSERT MAIN CODE HERE ****
+
+
+      // PROGRAM STEPS
+      // ==============================================================================
+
+      // 1 - Start New Game (Start New Game button press)
+      //       Reset game counters (gamesPlayed, gamesWon, displayWord, NumOfGuesses, lettersUsed)
+
+      // 2 - Pick random word from wordList, make = currentWord
+      //       var currentWord = wordList[Math.floor(Math.random()*wordList.length)];
+
+      // 3 - Convert currentWord into an addressable array (for letter positions)
+      //       Array.from(currentWord)
+
+      // 4 - Wait for key press
+
+      // 5 - Check if currentKey matches letter in currentWord (via a loop = currentWord.length)
+      //       If match:    print letter to displayWord
+      //       If no match: add to lettersUsed, update screen, add hangman limb, subtract from # of guesses
+
+      //  - Wait for key press
+
+
+
+
+      };
 
 
 
@@ -120,23 +183,6 @@
       // FUNCTIONS
       // ==============================================================================
 
-
-
-
-
-
-
-      // Let's start by grabbing a reference to the <span> below.
-      var userText = document.getElementById("user-press");
-
-      // Next, we give JavaScript a function to execute when onkeyup event fires.
-      document.onkeyup = function(event) {
-        userText.textContent = event.key;
-
-      console.log(userText.textContent);
-
-
-      }
 
     </script>
     
