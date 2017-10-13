@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Hangman Game</title>
+
+  </head>
+
+
+  <!-- HTML PAGE LAYOUT / BootStrap -->
+
+  <body>
+
+    <!-- Creates Overall Grid --> 
+    <div class="container">
+
+    <!-- FIRST ROW: "Hangman Game" heading and instructions, with game reset button --> 
+      <div class="jumbotron">
+        <h1>Hangman Game</h1>
+        <p>Classic word-guess game, played by selecting letters one at a time.  If you complete the word before running out of chances, you win!  Play as often as you'd like and see how many times you can win.  Good luck!!</p>
+        <p><a class="btn btn-primary btn-lg" href="#" role="button">Start New Game</a></p>
+      </div>
+
+
+
+
+    <!-- SECOND ROW: "Hangman Game" heading and instructions, with game reset button --> 
+
+      <div class="row">
+
+          <!-- 1 of 2 Columns -->
+          <div class="col-md-6">
+              <h2>TEST</h2>
+          </div>
+
+          <!-- 2 of 2 Columns -->
+          <div class="col-md-6">
+              <h2>Press  <span id="user-press"><strong>...Nothing.</strong></span></h2>
+          </div>
+
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+
+
+
+
+    <script type="text/javascript">
+
+      // VARIABLES, ARRAYS, OBJECTS/METHODS
+      // ==============================================================================
+
+
+      var gamesPlayed
+      var gamesWon
+      var words = ["A", "B"];
+
+      var car = {
+        make: "Honda",
+        model: "Fit",
+        color: "Blue Raspberry",
+        mileage: 3000,
+        isWorking: true,
+
+        driveToWork: function() {
+
+          alert("Old Mileage: " + this.mileage);
+          this.mileage = this.mileage + 8;
+          alert("New mileage: " + this.mileage);
+        },
+
+        driveAroundWorld: function() {
+
+          alert("Old Mileage: " + this.mileage);
+          this.mileage = this.mileage + 24000;
+          alert("New Mileage: " + this.mileage);
+          alert("Car needs a tuneup!");
+          this.isWorking = false;
+        },
+
+        getTuneUp: function() {
+
+          alert("Car is ready to go!");
+          this.isWorking = true;
+        },
+
+        honk: function() {
+
+          alert("Honk! Honk!");
+        }
+      };
+
+
+
+
+
+
+      // MAIN PROCESS
+      // ==============================================================================
+
+
+
+
+
+      // FUNCTIONS
+      // ==============================================================================
+
+
+
+
+
+
+
+      // Let's start by grabbing a reference to the <span> below.
+      var userText = document.getElementById("user-press");
+
+      // Next, we give JavaScript a function to execute when onkeyup event fires.
+      document.onkeyup = function(event) {
+        userText.textContent = event.key;
+
+      console.log(userText.textContent);
+
+
+      }
+
+    </script>
+    
+  </body>
+</html>
