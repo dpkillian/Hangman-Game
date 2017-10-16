@@ -212,8 +212,11 @@
 
               console.log("The currentWordArray is: " + currentWordArray);
               console.log("The current key pressed in the guesses loop: " + currentKey);
+              console.log("Below is the indexOf question.");
+              console.log("If 0, then letter is in word, if -1, then it is not!");
+              console.log(currentWordArray.indexOf(currentKey));
 
-              if ((currentWordArray.indexOf(currentKey))===0){
+              if ((currentWordArray.indexOf(currentKey))>-1){
 
                 console.log("Yes, it looks like the guess matched one of the letters!");
                 // console.log(currentKey);
