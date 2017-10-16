@@ -104,7 +104,7 @@
       // ==============================================================================
 
       // wordList is the total list of words available for the game
-      var wordList = ["ghost", "ghoul", "goblin", "witch", "dracula", "broomstick", "black cat", "fangs", "cemetery", "pumpkin", "candy", "lantern", "skeleton", "bat", "spider", "mummy", "tombstone", "howl", "spooky", "creepy", "scream", "cobweb", "fullmoon", "trick", "skull", "candy corn", "potion", "poison", "wicked", "blood", "zombie", "costume"];
+      var wordList = ["ghost", "ghoul", "goblin", "witch", "dracula", "broomstick", "black cat", "fangs", "cemetery", "pumpkin", "candy", "lantern", "skeleton", "bat", "spider", "mummy", "tombstone", "howl", "spooky", "creepy", "scream", "cobweb", "fullmoon", "trick", "skull", "cackle", "potion", "poison", "wicked", "blood", "zombie", "costume"];
 
       // alphabet is the list of valid guesses
       var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "V", "w", "x", "y", "z"];
@@ -120,7 +120,6 @@
 
       // currentWordArray is the currentWord converted into an array of letters
       var currentWordArray = [];
-
 
       // displayWord is an array whose length = to currentWord with all zeros (until a correct guess)
       var displayWord = [];
@@ -143,25 +142,9 @@
       }
 
 
-      // Print initial values to console.log
-      // console.log(gamesPlayed);
-      // console.log(gamesWon);
-      // console.log(currentWord);
-      // console.log(displayWord);
-      // console.log(totalGuesses);
-      // console.log(remainingGuesses);
-      // console.log(lettersUsed);
-      // console.log(currentKey);
-
-
-      //  Loop through entire wordList
-      // for (var i=0; i<wordList.length; i++){
-      // console.log(wordList[i]);  
-      // }
 
       // PROGRAM STEPS
       // ==============================================================================
-
       // 1 - Start New Game (Start New Game button press) -- Outter loop
       //       Reset game counters (gamesPlayed, gamesWon, displayWord, NumOfGuesses, lettersUsed)
 
@@ -225,15 +208,6 @@
 
               console.log("Remaining guesses are that are greater than 0: " + remainingGuesses);
 
-              // // Reduce number of remaining-guesses and update the <div>
-              // remainingGuesses = remainingGuesses - 1;
-              // document.querySelector("#remaining-guesses").innerHTML = remainingGuesses;
-          
-              // Write textContent to console
-              // console.log(currentKey);
-              // console.log("test");
-              // console.log(currentWordArray.indexOf(currentKey));
-
               // 7 - Check to see if currentKey is a letter in the currentWordArray
 
               console.log("The currentWordArray is: " + currentWordArray);
@@ -282,6 +256,8 @@
               // 11 - Reduce number of remaining-guesses and update the <div>
               remainingGuesses = remainingGuesses - 1;
               document.querySelector("#remaining-guesses").innerHTML = remainingGuesses;
+              console.log("There are now only " + remainingGuesses + " remaining guesses");
+
 
               }
 
@@ -308,14 +284,6 @@
       };
 
 
-
-
-      // FUNCTIONS
-      // ==============================================================================
-
-      // addLimb (){}
-
-      // addToLettersUsed (){}
 
 
     </script>
