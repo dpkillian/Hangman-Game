@@ -45,7 +45,7 @@
               <div class="panel-heading">
                 <h3 class="panel-title">Wins</h3>
               </div>
-              <div class="panel-body">
+              <div class="games-won panel-body">
                 INSERT "gamesWon"
               </div>
             </div>
@@ -63,7 +63,7 @@
               <div class="panel-heading">
                 <h3 class="panel-title">Current Word</h3>
               </div>
-              <div class="panel-body">
+              <div id="current-word" class="panel-body">
                   INSERT "currentWord"
               </div>
             </div>
@@ -73,7 +73,7 @@
               <div class="panel-heading">
                 <h3 class="panel-title">Number of Guesses Remaining</h3>
               </div>
-              <div class="panel-body">
+              <div id="remaining-guesses" class="panel-body">
                   INSERT "remainingGuesses"
               </div>
             </div>
@@ -84,7 +84,7 @@
               <div class="panel-heading">
                 <h3 class="panel-title">Letters Used</h3>
               </div>
-              <div class="panel-body">
+              <div id="letters-used" class="panel-body">
                   INSERT "lettersUsed"
               </div>
             </div>
@@ -104,7 +104,7 @@
       // ==============================================================================
 
       // wordList is the total list of words available for the game
-      var wordsList = ["ghost", "ghoul", "goblin", "witch", "dracula", "broomstick", "black cat", "fangs", "cemetery", "pumpkin", "candy", "lantern", "skeleton", "bat", "spider", "mummy", "tombstone", "howl", "spooky", "creepy", "scream", "cobweb", "fullmoon", "trick", "skull", "candy corn", "potion", "poison", "wicked", "blood", "zombie", "costume"];
+      var wordList = ["ghost", "ghoul", "goblin", "witch", "dracula", "broomstick", "black cat", "fangs", "cemetery", "pumpkin", "candy", "lantern", "skeleton", "bat", "spider", "mummy", "tombstone", "howl", "spooky", "creepy", "scream", "cobweb", "fullmoon", "trick", "skull", "candy corn", "potion", "poison", "wicked", "blood", "zombie", "costume"];
 
       // alphabet is the list of valid guesses
       var alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
@@ -115,7 +115,7 @@
       // gamesWon is the total games won (until a reset)
       var gamesWon = 0;
 
-      // currentWord is randomly picked from wordsList at reset or game-end
+      // currentWord is randomly picked from wordList at reset or game-end
       var currentWord = 0;
 
       // displayWord is an array.length = to currentWord with all zeros (until a correct guess)
@@ -133,7 +133,30 @@
       // gamesPlayed is the total games played (until a reset)
       var currentKey = 0;
 
+      // 
+      Array.prototype.randomElement = function(){
+      return this[Math.floor(Math.random()*this.length)];
+      }
 
+      // Print initial values to console.log
+      // console.log(gamesPlayed);
+      // console.log(gamesWon);
+      // console.log(currentWord);
+      // console.log(displayWord);
+      // console.log(totalGuesses);
+      // console.log(remainingGuesses);
+      // console.log(lettersUsed);
+      // console.log(currentKey);
+
+
+      //  Loop through entire wordList
+      // for (var i=0; i<wordList.length; i++){
+      // console.log(wordList[i]);  
+      // }
+
+      // 
+      currentWord = wordList.randomElement()
+      console.log(currentWord);
 
 
       // MAIN PROCESS: Wait for key press
@@ -150,6 +173,10 @@
       console.log(userText.textContent);
 
       // **** INSERT MAIN CODE HERE ****
+
+      // Place keyboard input into "letters-used" <div> in panel
+      // document.querySelector("#letters-used").innerHTML = userText.textContent;
+
 
 
       // PROGRAM STEPS
