@@ -216,19 +216,18 @@
             document.querySelector("#remaining-guesses").innerHTML = "No more guesses left, you lose!!";
           } else {
 
-              // Reduce number of remaining-guesses
+              // Reduce number of remaining-guesses and update the <div>
               remainingGuesses = remainingGuesses - 1;
               document.querySelector("#remaining-guesses").innerHTML = remainingGuesses;
           
               // Write textContent to console
               // console.log(currentKey);
-
-                console.log("test");
-
+              // console.log("test");
+              // console.log(currentWordArray.indexOf(currentKey));
 
               // 7 - Check to see if currentKey is a letter in the currentWordArray
 
-              if ((currentWordArray.indexOf(currentKey))>0){
+              if ((currentWordArray.indexOf(currentKey))===0){
 
                 console.log("hurray");
                 // console.log(currentKey);
@@ -236,10 +235,13 @@
  
                 // 8 - The letter exists in the currentWord, now check each letter by position
 
-                for (var i=0; i>currentWord.length; i++){
+                for (var i=0; i<currentWord.length; i++){
 
                   // 9 - If the guess is correct set all instances of the letter in the displayWord                
-                    console.log("yes!!");
+                    // console.log("yes!!");
+
+                  // console.log(displayWord[i]);
+                  // console.log(currentWordArray[i]);
 
                   if (currentKey === currentWordArray[i]){
                     displayWord[i] = currentWordArray[i]
@@ -250,8 +252,11 @@
 
                 }
 
-            // console.log(displayWord);
-            // console.log(currentWordArray);
+            // Place updated displayWord into "display-word" <div> in panel
+            // document.querySelector("#display-word").innerHTML = displayWord;
+               
+            console.log(displayWord);
+            console.log(currentWordArray);
 
 
               };
@@ -261,6 +266,7 @@
               // 7 - Add currentKey to lettersUsed array
               lettersUsed.push(currentKey); 
               // console.log(lettersUsed);
+
 
 
               // Place keyboard input into "letters-used" <div> in panel
