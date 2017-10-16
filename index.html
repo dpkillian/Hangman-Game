@@ -63,8 +63,8 @@
               <div class="panel-heading">
                 <h3 class="panel-title">Current Word</h3>
               </div>
-              <div id="current-word" class="panel-body">
-                  INSERT "currentWord"
+              <div id="display-word" class="panel-body">
+                  INSERT "displayWord"
               </div>
             </div>
 
@@ -100,14 +100,14 @@
 
     <script type="text/javascript">
 
-      // VARIABLES, ARRAYS, OBJECTS/METHODS
+      // VARIABLES, ARRAYS, OBJECTS, METHODS, FUNCTIONS
       // ==============================================================================
 
       // wordList is the total list of words available for the game
       var wordList = ["ghost", "ghoul", "goblin", "witch", "dracula", "broomstick", "black cat", "fangs", "cemetery", "pumpkin", "candy", "lantern", "skeleton", "bat", "spider", "mummy", "tombstone", "howl", "spooky", "creepy", "scream", "cobweb", "fullmoon", "trick", "skull", "candy corn", "potion", "poison", "wicked", "blood", "zombie", "costume"];
 
       // alphabet is the list of valid guesses
-      var alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+      var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "V", "w", "x", "y", "z"];
 
       // gamesPlayed is the total games played (until a reset)
       var gamesPlayed = 0;
@@ -116,27 +116,32 @@
       var gamesWon = 0;
 
       // currentWord is randomly picked from wordList at reset or game-end
-      var currentWord = 0;
+      var currentWord = [];
 
-      // displayWord is an array.length = to currentWord with all zeros (until a correct guess)
-      var displayWord = 0;
+      // currentWordArray is the currentWord converted into an array of letters
+      var currentWordArray = [];
+
+
+      // displayWord is an array whose length = to currentWord with all zeros (until a correct guess)
+      var displayWord = [];
 
       // totalGuesses is the total number of guesses until a reset or game-end
       var totalGuesses = 0;
 
       // remainingGuesses is the number of (totalGuesses - incorrect attempts) until a reset or game-end
-      var remainingGuesses = 0;
+      var remainingGuesses = 4;
 
       // lettersUsed is the array of letters picked until a reset or game-end
-      var lettersUsed = 0;
+      var lettersUsed = [];
 
-      // gamesPlayed is the total games played (until a reset)
+      // currentKey is the total games played (until a reset)
       var currentKey = 0;
 
-      // 
+      // Define randomElement function which randomly selects an element in an array
       Array.prototype.randomElement = function(){
       return this[Math.floor(Math.random()*this.length)];
       }
+
 
       // Print initial values to console.log
       // console.log(gamesPlayed);
@@ -154,12 +159,40 @@
       // console.log(wordList[i]);  
       // }
 
-      // 
+      // PROGRAM STEPS
+      // ==============================================================================
+
+      // 1 - Start New Game (Start New Game button press) -- Outter loop
+      //       Reset game counters (gamesPlayed, gamesWon, displayWord, NumOfGuesses, lettersUsed)
+
+      // Place remainingGuesses into "remaining-guesses" <div> in panel
+      document.querySelector("#remaining-guesses").innerHTML = remainingGuesses;
+
+
+      // 2 - Pick random word from wordList, make = currentWord
+      //       Call function "randomElement" which randomly selects word from an array
+
       currentWord = wordList.randomElement()
       console.log(currentWord);
 
+      // Set displayWord array to all "_"
+      for (var i=0; i<currentWord.length; i++){
+      console.log("loop");
+      displayWord[i] = "_";
+      console.log(displayWord[i]);
+      }
 
-      // MAIN PROCESS: Wait for key press
+      // Place displayWord into "display-word" <div> in panel
+      document.querySelector("#display-word").innerHTML = displayWord;
+
+
+      // 3 - Convert currentWord into an addressable array (for letter positions and comparisons)
+      //       Array.from(currentWord)
+
+      currentWordArray = Array.from(currentWord);
+
+
+      // 4 - MAIN PROCESS: Wait for key press
       // ==============================================================================
 
       // Grab reference to the <span> below...
@@ -167,43 +200,49 @@
 
       // Execute main process "onkeyup" event
       document.onkeyup = function(event) {
-        userText.textContent = event.key;
-
-      // Write textContent to console
-      console.log(userText.textContent);
-
-      // **** INSERT MAIN CODE HERE ****
-
-      // Place keyboard input into "letters-used" <div> in panel
-      // document.querySelector("#letters-used").innerHTML = userText.textContent;
+          userText.textContent = event.key;
 
 
+          // **** INSERT MAIN CODE HERE ****
 
-      // PROGRAM STEPS
-      // ==============================================================================
+          // 5 - Assign key press (event.key) to currentKey
+          currentKey = userText.textContent;
 
-      // 1 - Start New Game (Start New Game button press)
-      //       Reset game counters (gamesPlayed, gamesWon, displayWord, NumOfGuesses, lettersUsed)
+          // 6 - Check to see if there are any more remainingGuesses
+          //       If remainingGuess = 0; Notify that there are no remaining guesses and the game is over
+          //       else: Continue
 
-      // 2 - Pick random word from wordList, make = currentWord
-      //       var currentWord = wordList[Math.floor(Math.random()*wordList.length)];
+          if (remainingGuesses===0){
+            document.querySelector("#remaining-guesses").innerHTML = "No more guesses left, you lose!!";
+          } else {
 
-      // 3 - Convert currentWord into an addressable array (for letter positions and comparisons)
-      //       Array.from(currentWord)
+              // Reduce number of remaining-guesses
+              remainingGuesses = remainingGuesses - 1;
+              document.querySelector("#remaining-guesses").innerHTML = remainingGuesses;
+          
 
-      // 4 - Wait for key press
+          // 7 - Assign to currentKey; add currentKey to lettersUsed array
+  
 
-      // 5 - Check to see if there are any more remainingGuesses
-      //       If remainingGuess > 0; continue
-      //       else: Notify that there are no remaining guesses and the game is over
+              // Write textContent to console
+              console.log(currentKey);
 
-      // 6 - Capture key press and assign to currentKey; add currentKey to lettersUsed array
+              // Add currentKey to lettersUsed array
+              lettersUsed.push(currentKey); 
+              console.log(lettersUsed);
 
-      // 7 - Check if currentKey matches letter in currentWord (via a loop = currentWord.length)
-      //       If match:    print letter to displayWord in the proper position, add to lettersUsed
-      //       If no match: update Hangman drawing, (f: add limb), subtract from # of guesses, add to lettersUsed
 
-      //  - Wait for next key press; go to 5
+              // Place keyboard input into "letters-used" <div> in panel
+              document.querySelector("#letters-used").innerHTML = lettersUsed;
+          }
+
+
+
+          // 8 - Check if currentKey matches letter in currentWord (via a loop = currentWord.length)
+          //       If match:    print letter to displayWord in the proper position, add to lettersUsed
+          //       If no match: update Hangman drawing, (f: add limb), subtract from # of guesses, add to lettersUsed
+
+          //  - Wait for next key press; go to 5
 
 
 
