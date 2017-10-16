@@ -135,7 +135,7 @@
       var lettersUsed = [];
 
       // currentKey is the total games played (until a reset)
-      var currentKey = 0;
+      var currentKey;
 
       // Define randomElement function which randomly selects an element in an array
       Array.prototype.randomElement = function(){
@@ -220,16 +220,47 @@
               remainingGuesses = remainingGuesses - 1;
               document.querySelector("#remaining-guesses").innerHTML = remainingGuesses;
           
-
-          // 7 - Assign to currentKey; add currentKey to lettersUsed array
-  
-
               // Write textContent to console
-              console.log(currentKey);
+              // console.log(currentKey);
 
-              // Add currentKey to lettersUsed array
+                console.log("test");
+
+
+              // 7 - Check to see if currentKey is a letter in the currentWordArray
+
+              if ((currentWordArray.indexOf(currentKey))>0){
+
+                console.log("hurray");
+                // console.log(currentKey);
+                // console.log(currentWordArray[0]);
+ 
+                // 8 - The letter exists in the currentWord, now check each letter by position
+
+                for (var i=0; i>currentWord.length; i++){
+
+                  // 9 - If the guess is correct set all instances of the letter in the displayWord                
+                    console.log("yes!!");
+
+                  if (currentKey === currentWordArray[i]){
+                    displayWord[i] = currentWordArray[i]
+                  }
+
+                  // console.log(displayWord[i]);
+                  // console.log(currentWordArray[i]);
+
+                }
+
+            // console.log(displayWord);
+            // console.log(currentWordArray);
+
+
+              };
+
+              // if (currentWordArray.indexOf(currentKey)>0) 
+
+              // 7 - Add currentKey to lettersUsed array
               lettersUsed.push(currentKey); 
-              console.log(lettersUsed);
+              // console.log(lettersUsed);
 
 
               // Place keyboard input into "letters-used" <div> in panel
