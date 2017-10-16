@@ -206,11 +206,14 @@
       document.onkeyup = function(event) {
           userText.textContent = event.key;
 
+          console.log("ONKEYUP TRIGGERED");
 
           // **** INSERT MAIN CODE HERE ****
 
           // 5 - Assign key press (event.key) to currentKey
           currentKey = userText.textContent;
+
+          console.log("This is the current key pressed: " + currentKey);
 
           // 6 - Check to see if there are any more remainingGuesses
           //       If remainingGuess = 0; Notify that there are no remaining guesses and the game is over
@@ -219,6 +222,8 @@
           if (remainingGuesses===0){
             document.querySelector("#remaining-guesses").innerHTML = "No more guesses left, you lose!!";
           } else {
+
+              console.log("Remaining guesses are that are greater than 0: " + remainingGuesses);
 
               // // Reduce number of remaining-guesses and update the <div>
               // remainingGuesses = remainingGuesses - 1;
@@ -231,9 +236,12 @@
 
               // 7 - Check to see if currentKey is a letter in the currentWordArray
 
+              console.log("The currentWordArray is: " + currentWordArray);
+              console.log("The current key pressed in the guesses loop: " + currentKey);
+
               if ((currentWordArray.indexOf(currentKey))===0){
 
-                console.log("hurray");
+                console.log("Yes, it looks like the guess matched one of the letters!");
                 // console.log(currentKey);
                 // console.log(currentWordArray[0]);
  
@@ -242,7 +250,7 @@
                 for (var i=0; i<currentWord.length; i++){
 
                   // 9 - If the guess is correct set all instances of the letter in the displayWord                
-                    // console.log("yes!!");
+                    console.log("Looping thru each letter to see if there is a match.  Loop: " + i);
 
                   // console.log(displayWord[i]);
                   // console.log(currentWordArray[i]);
@@ -258,41 +266,44 @@
 
             // Place updated displayWord into "display-word" <div> in panel
             // document.querySelector("#display-word").innerHTML = displayWord;
-               
-            console.log(displayWord);
-            console.log(currentWordArray);
+            
+            console.log("Just finished the letter by letter compare!")   
+            console.log("This is what will be displayed with matching letters: " + displayWord);
+            console.log("This is the currentWordArray: " + currentWordArray);
 
             // Place new displayWord into "display-word" <div> in panel
             document.querySelector("#display-word").innerHTML = displayWord;
 
 
-              };
+              } else {
 
-              // if (currentWordArray.indexOf(currentKey)>0) 
+              console.log("This should run if there is not a letter match!");
 
-              // 7 - Add currentKey to lettersUsed array
-              lettersUsed.push(currentKey); 
-              // console.log(lettersUsed);
-              
-              // Reduce number of remaining-guesses and update the <div>
+              // 11 - Reduce number of remaining-guesses and update the <div>
               remainingGuesses = remainingGuesses - 1;
               document.querySelector("#remaining-guesses").innerHTML = remainingGuesses;
 
+              }
 
-              // Place keyboard input into "letters-used" <div> in panel
-              document.querySelector("#letters-used").innerHTML = lettersUsed;
-          }
+            // 10 - Add currentKey to lettersUsed array
+            lettersUsed.push(currentKey); 
+
+            console.log("The lettersUsed array has been updated: " + lettersUsed);              
+
+            // Place keyboard input into "letters-used" <div> in panel
+            document.querySelector("#letters-used").innerHTML = lettersUsed;
 
 
+           }   
+
+
+          console.log("We are at the bottom of the script...waiting for another key press!!");
 
           // 8 - Check if currentKey matches letter in currentWord (via a loop = currentWord.length)
           //       If match:    print letter to displayWord in the proper position, add to lettersUsed
           //       If no match: update Hangman drawing, (f: add limb), subtract from # of guesses, add to lettersUsed
 
           //  - Wait for next key press; go to 5
-
-
-
 
       };
 
