@@ -134,6 +134,10 @@
       // currentKey is the total games played (until a reset)
       var currentKey;
 
+      var someVarName = "value";
+      localStorage.setItem("someVarName", someVarName);
+
+
       // Define randomElement function which randomly selects an element in an array
       Array.prototype.randomElement = function(){
       return this[Math.floor(Math.random()*this.length)];
@@ -283,7 +287,6 @@
           console.log("Yay!!  We have a match!!!");
           alert("Congrats, you win!!  Click 'OK' to to play again!!")  
           location.reload();            
-          // document.querySelector("#you-win").innerHTML = ("Congrats, you win!!");
           gamesWon = gamesWon+1;
           document.querySelector("#games-won").innerHTML = gamesWon;
 
