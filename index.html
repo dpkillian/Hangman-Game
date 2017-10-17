@@ -202,6 +202,7 @@
           if (remainingGuesses===0){
             document.querySelector("#remaining-guesses").innerHTML = "No more guesses left, you lose!!";
             alert("Try Again!")
+            location.reload();            
           } else {
 
               console.log("Remaining guesses are that are greater than 0: " + remainingGuesses);
@@ -280,7 +281,8 @@
 
 
           console.log("Yay!!  We have a match!!!");
-          alert("Congrats, you win!!  Click 'OK' to to play again!!")              
+          alert("Congrats, you win!!  Click 'OK' to to play again!!")  
+          location.reload();            
           // document.querySelector("#you-win").innerHTML = ("Congrats, you win!!");
           gamesWon = gamesWon+1;
           document.querySelector("#games-won").innerHTML = gamesWon;
