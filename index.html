@@ -20,7 +20,7 @@
 
     <!-- FIRST ROW: "Hangman Game" heading and instructions, with game reset button --> 
       <div class="jumbotron">
-        <h1>Hang "Spider" Game</h1>
+        <h2>Hang "Spider" Game</h2>
         <p>Hang "Spider" is a classic word-guess game, very similar to Hangman...only with a little Halloween twist.  It begins when you select a letter (by pressing a key).  The goal is to guess what the word is, one letter at a time.  If you figure out the word before running out of chances, you win!  Play as often as you'd like and see how many times you can win.  Good luck and Happy Hunting ;)</p>
         <p><a class="btn btn-primary btn-lg" href="#" role="button">Start New Game</a></p>
       </div>
@@ -37,8 +37,6 @@
 
             <!-- Hangman Image Place Holder -->
             <a href="XYZ" id="spider"><img class="img-responsive center-block" src="./assets/images/sprite_000.png"></a>
-            <br>
-            <br>
 
             <!-- "Wins" Box -->
             <div class="panel panel-default">
@@ -262,7 +260,7 @@
               console.log("There are now only " + remainingGuesses + " remaining guesses");
 
               // 12 - Grab a new image with id=spider and replace with new image
-              document.getElementById("spider").innerHTML ='<img src="./assets/images/sprite_0' + remainingGuesses + '.png">';
+              document.getElementById("spider").innerHTML ='<img class="img-responsive center-block" src="./assets/images/sprite_0' + remainingGuesses + '.png">';
 
               }
 
@@ -289,7 +287,6 @@
 
         }
           console.log("We are at the bottom of the script...waiting for another key press!!"); 
- 
 
 
       };
