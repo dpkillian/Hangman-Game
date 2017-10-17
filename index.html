@@ -20,8 +20,8 @@
 
     <!-- FIRST ROW: "Hangman Game" heading and instructions, with game reset button --> 
       <div class="jumbotron">
-        <h1>Hangman Game</h1>
-        <p>Hangman is a classic word-guess game.  It begins when you select a letter (by pressing a key).  The goal is to guess what the word is, one letter at a time.  If you figure out the word before running out of chances, you win!  Play as often as you'd like and see how many times you can win.  Good luck and Happy Hunting ;)</p>
+        <h1>Hang "Spider" Game</h1>
+        <p>Hang "Spider" is a classic word-guess game, very similar to Hangman...only with a little Halloween twist.  It begins when you select a letter (by pressing a key).  The goal is to guess what the word is, one letter at a time.  If you figure out the word before running out of chances, you win!  Play as often as you'd like and see how many times you can win.  Good luck and Happy Hunting ;)</p>
         <p><a class="btn btn-primary btn-lg" href="#" role="button">Start New Game</a></p>
       </div>
 
@@ -36,7 +36,7 @@
           <div class="col-md-6">
 
             <!-- Hangman Image Place Holder -->
-            <a href="https://placeholder.com"><img class="img-responsive center-block" src="http://via.placeholder.com/450x350"></a>
+            <a href="XYZ" id="spider"><img class="img-responsive center-block" src="./assets/images/sprite_000.png"></a>
             <br>
             <br>
 
@@ -55,7 +55,7 @@
 
           <!-- 2 of 2 Columns: Right Column = Current Game Status (Word, # Guesses, Letters Used) -->
           <div class="col-md-6">
-            <h4>You Pressed the Key:  <span id="user-press"><strong>...Nothing.</strong></span></h4>
+            <h4 id="you-win">You Pressed the Key:  <span id="user-press"><strong>...Nothing.</strong></span></h4>
             <br>
 
             <!-- "Current Word" Box -->
@@ -128,7 +128,7 @@
       var totalGuesses = 0;
 
       // remainingGuesses is the number of (totalGuesses - incorrect attempts) until a reset or game-end
-      var remainingGuesses = 4;
+      var remainingGuesses = 9;
 
       // lettersUsed is the array of letters picked until a reset or game-end
       var lettersUsed = [];
@@ -164,13 +164,12 @@
 
       // Set displayWord array to all "_"
       for (var i=0; i<currentWord.length; i++){
-      console.log("loop");
       displayWord[i] = "_";
-      console.log(displayWord[i]);
+      // console.log(displayWord[i]);
       }
 
       // Place displayWord into "display-word" <div> in panel
-      document.querySelector("#display-word").innerHTML = displayWord;
+      document.querySelector("#display-word").innerHTML = displayWord.join(" ");
 
 
       // 3 - Convert currentWord into an addressable array (for letter positions and comparisons)
@@ -186,7 +185,7 @@
       var userText = document.getElementById("user-press");
 
       // Execute main process "onkeyup" event
-      document.onkeyup = function(event) {
+      document.onkeyup = function(event){
           userText.textContent = event.key;
 
           console.log("ONKEYUP TRIGGERED");
@@ -204,6 +203,7 @@
 
           if (remainingGuesses===0){
             document.querySelector("#remaining-guesses").innerHTML = "No more guesses left, you lose!!";
+            alert("Try Again!")
           } else {
 
               console.log("Remaining guesses are that are greater than 0: " + remainingGuesses);
@@ -241,7 +241,7 @@
 
                 }
 
-            // Place updated displayWord into "display-word" <div> in panel
+            // 10 - Place updated displayWord into "display-word" <div> in panel
             // document.querySelector("#display-word").innerHTML = displayWord;
             
             console.log("Just finished the letter by letter compare!")   
@@ -249,7 +249,7 @@
             console.log("This is the currentWordArray: " + currentWordArray);
 
             // Place new displayWord into "display-word" <div> in panel
-            document.querySelector("#display-word").innerHTML = displayWord;
+            document.querySelector("#display-word").innerHTML = displayWord.join(" ");
 
 
               } else {
@@ -261,10 +261,12 @@
               document.querySelector("#remaining-guesses").innerHTML = remainingGuesses;
               console.log("There are now only " + remainingGuesses + " remaining guesses");
 
+              // 12 - Grab a new image with id=spider and replace with new image
+              document.getElementById("spider").innerHTML ='<img src="./assets/images/sprite_0' + remainingGuesses + '.png">';
 
               }
 
-            // 10 - Add currentKey to lettersUsed array
+            // 12 - Add currentKey to lettersUsed array
             lettersUsed.push(currentKey); 
 
             console.log("The lettersUsed array has been updated: " + lettersUsed);              
@@ -275,19 +277,22 @@
 
            }   
 
+        // 13 - Test to see if currentWord = displayWord; if so, YOU WIN!!!!!
+        if (currentWord.toString() === displayWord.join("")){
 
-          console.log("We are at the bottom of the script...waiting for another key press!!");
 
-          // 8 - Check if currentKey matches letter in currentWord (via a loop = currentWord.length)
-          //       If match:    print letter to displayWord in the proper position, add to lettersUsed
-          //       If no match: update Hangman drawing, (f: add limb), subtract from # of guesses, add to lettersUsed
+          console.log("Yay!!  We have a match!!!");
+          alert("Congrats, you win!!  Click 'OK' to to play again!!")              
+          // document.querySelector("#you-win").innerHTML = ("Congrats, you win!!");
+          gamesWon = gamesWon+1;
+          document.querySelector("#games-won").innerHTML = gamesWon;
 
-          //  - Wait for next key press; go to 5
+        }
+          console.log("We are at the bottom of the script...waiting for another key press!!"); 
+ 
+
 
       };
-
-
-
 
     </script>
     
